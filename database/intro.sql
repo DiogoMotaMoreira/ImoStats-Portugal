@@ -8,7 +8,8 @@ CREATE TABLE cidade(
 CREATE TABLE imovel(
     id_imovel INTEGER AUTO_INCREMENT PRIMARY KEY,
     id_cidade INTEGER NOT NULL,
-    tipo_imovel VARCHAR(150) NOT NULL,
+    tipo_imovel VARCHAR(50) NOT NULL,
+    sub_tipo_imovel VARCHAR(50),
     preco DOUBLE(15 , 2) NOT NULL,
     area_m2 DOUBLE(8,2) NOT NULL,
     data_registo DATETIME NOT NULL, 
