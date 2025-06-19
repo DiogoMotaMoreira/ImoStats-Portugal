@@ -7,7 +7,7 @@ tipos_imovel = ['Moradia Isolada', 'Moradia em Banda', 'Moradia Germinada', 'Apa
 subtipos_imovel =['T0', 'T1', 'T2', 'T3', 'T4']
 
 
-with open('cidades.json', "r", encoding="utf-8") as f:
+with open('ImoStats-Portugal/dataset/cidades.json', "r", encoding="utf-8") as f:
     cidades = json.load(f)
 
 
@@ -42,5 +42,5 @@ for i in range(1, 5001):
     imoveis.append(imovel)
 
 # Exportar para JSON
-with open("imoveis.json", "w", encoding="utf-8") as f:
+with open("ImoStats-Portugal/dataset/imoveis.json", "w", encoding="utf-8") as f:
     json.dump(imoveis, f, ensure_ascii=False, indent=2)
