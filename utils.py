@@ -36,7 +36,7 @@ def deltaValorMedioPrecoImovel(tipo, subtipo ,local):
     query = """
         SELECT AVG(preco)
         FROM imovel
-        WHERE data_registo < DATE('now', '-7 days') 
+        WHERE data_registo < DATE('now', '-1 month') 
         AND (? IS NULL OR tipo_imovel = ?)
         AND (? IS NULL OR sub_tipo_imovel = ?)
         AND (? IS NULL OR id_cidade = (
@@ -94,7 +94,7 @@ def deltaValorMedioM2(tipo, subtipo ,local):
     query = """
         SELECT AVG(preco/area_m2)
         FROM imovel
-        WHERE data_registo < DATE('now', '-7 days') 
+        WHERE data_registo < DATE('now', '-1 month') 
         AND (? IS NULL OR tipo_imovel = ?)
         AND (? IS NULL OR sub_tipo_imovel = ?)
         AND (? IS NULL OR id_cidade = (
@@ -104,7 +104,7 @@ def deltaValorMedioM2(tipo, subtipo ,local):
     cursor = conexao.execute(query, (tipo, tipo, subtipo, subtipo, local, local))
     x1 = cursor.fetchone()[0]
     query = """
-        SELECT AVG(preco)
+        SELECT AVG(preco/area_m2)
         FROM imovel
         WHERE (? IS NULL OR tipo_imovel = ?)
         AND (? IS NULL OR sub_tipo_imovel = ?)
@@ -116,8 +116,8 @@ def deltaValorMedioM2(tipo, subtipo ,local):
     x2 = cursor.fetchone()[0]
     conexao.commit()
 
-    x1 = str(round(x1, 2)) if x1 else '0'
-    x2 = str(round(x2, 2)) if x2 else '0'
+    x1 = x1 if x1 else '0'
+    x2 = x2 if x2 else '0'
 
     valor = float(x1)-float(x2)
 
