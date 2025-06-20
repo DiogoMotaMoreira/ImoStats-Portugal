@@ -17,7 +17,9 @@ Visualização de preços médios por região, tipo e subtipo de imóvel
 ## 🔧 Como Executar em Linux
 ### Instalar dependências (usar um ambiente virtual é recomendado)
 python3 -m venv venv
+
 source venv/bin/activate
+
 pip install streamlit
 
 -- deactivate (pra sair de ambiente virtual)
