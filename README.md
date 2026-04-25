@@ -1,6 +1,8 @@
 # ImoStats-Portugal
 Dashboard público sobre custos de vida no setor imobiliário em Portugal, desenvolvido em Python com sqlite3 e streamlit.
 
+![Demonstração](./v.gif)
+
 ## 📊 Visão Geral
 O ImoStats-Portugal é uma aplicação interativa que apresenta dados sobre preços de imóveis e valores do mercado imobiliário nas principais regiões de Portugal. O objetivo é disponibilizar uma ferramenta acessível para análise de custo de vida relacionada à habitação.
 
