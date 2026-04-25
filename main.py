@@ -2,8 +2,17 @@ import streamlit as st
 import pandas as pd
 
 
-from database import carregarDataBase
-from utils import *
+from database import carregarDataBase # Assuming carregarDataBase is the only function from database
+from utils import ( # Explicitly import functions from utils
+    getCidades,
+    getTiposImovel,
+    getSubTiposImovel,
+    valorMedioPrecoImovel,
+    deltaValorMedioPrecoImovel,
+    valorMedioM2,
+    deltaValorMedioM2,
+    tabelaPrecoDatas,
+)
 
 
 
@@ -29,15 +38,21 @@ option2 = op2.selectbox(
     index=None
 )
 
+option3 = None # Initialize option3 here
+
 if option2:
-    df = getSubTiposImovel(option2)
-    if df.iloc[0,0]!='':
+    # Ensure getSubTiposImovel returns a list-like object for selectbox
+    # Assuming getSubTiposImovel(option2) returns a DataFrame with a single column of subtypes
+    subtipos_df = getSubTiposImovel(option2)
+    # Check if the DataFrame is not empty and contains actual subtype values
+    # Assuming an empty string or NaN indicates no valid subtype
+    valid_subtipos = subtipos_df[subtipos_df.iloc[:, 0].astype(str).str.strip() != ''].iloc[:, 0].tolist()
+    if valid_subtipos:
         option3 = op3.selectbox(
             "Seleciona o subtipo de Imóvel",
-            (df),
+            valid_subtipos,
             index=None
         )
-    else: option3 = None
 else: option3 = None
 
 
@@ -49,10 +64,10 @@ col1,col2 = st.columns(2)
 col1.metric(label="Preço médio Imovel em Portugal", value=valorMedioPrecoImovel(option2, option3, option1)+ "€", delta=deltaValorMedioPrecoImovel(option2, option3, option1), delta_color="inverse", border=True)
 col2.metric(label="Preço médio M^2 em Portugal", value=valorMedioM2(option2, option3, option1) + "€", delta=deltaValorMedioM2(option2, option3, option1), delta_color="inverse", border=True)
 
-
 # Gráfico de variação de preços ao longo do tempo
-df = tabelaPrecoDatas(option2, option3, option1) 
-st.line_chart(df)
+# Renaming 'df' to 'price_data_df' for clarity, as 'df' was used for subtypes earlier.
+price_data_df = tabelaPrecoDatas(option2, option3, option1)
+st.line_chart(price_data_df)
 
 
 

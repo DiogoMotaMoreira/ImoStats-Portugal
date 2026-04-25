@@ -149,7 +149,7 @@ def tabelaPrecoDatas(tipo, subtipo ,local):
     df.set_index("data_registo", inplace=True)
     
     # é preciso agrupar dados por mês para melhorar a visualização dos dados
-    df_agrupado = df.resample('M').mean()
+    df_agrupado = df.resample('ME').mean()
 
     df_agrupado = df_agrupado.interpolate(method='linear')
 
